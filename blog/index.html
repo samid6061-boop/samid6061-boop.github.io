@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Sami Uddin | SEO, Copywriting & AI Content Notes</title>
+<meta name="description" content="Practical notes on SEO content, copywriting, and AI-assisted production from Sami Uddin — a working freelancer, not a theory blog.">
+<link rel="canonical" href="https://samid6061-boop.github.io/blog/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blog — Sami Uddin">
+<meta property="og:description" content="Practical notes on SEO content, copywriting, and AI-assisted production.">
+<meta property="og:url" content="https://samid6061-boop.github.io/blog/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#0f1116; --paper-raised:#171a21; --ink:#eeeee8; --ink-soft:#a7a8a3;
+  --rule:#2b2f38; --mark:#f5d90a; --mark-ink:#1a1a12; --green:#5fd98d; --coral:#ff7a6e;
+  --radius:10px; --serif:'Fraunces','Georgia',serif; --sans:'Inter',system-ui,sans-serif; --maxw:1080px;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){ --paper:#f7f5f0; --paper-raised:#ffffff; --ink:#181818; --ink-soft:#5c5c56; --rule:#ddd8cc; --mark-ink:#1a1a12; }
+}
+:root[data-theme="light"]{ --paper:#f7f5f0; --paper-raised:#ffffff; --ink:#181818; --ink-soft:#5c5c56; --rule:#ddd8cc; --mark-ink:#1a1a12; }
+*{box-sizing:border-box;}
+body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased; }
+a{ color:inherit; }
+.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+header.site{ position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--rule); }
+.nav{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:var(--maxw); margin:0 auto; }
+.nav .mark-logo{ font-family:var(--serif); font-weight:600; font-size:1.15rem; text-decoration:none; }
+.nav .mark-logo span{ color:var(--mark); }
+.nav ul{ list-style:none; display:flex; gap:28px; margin:0; padding:0; }
+.nav ul a{ text-decoration:none; font-size:.93rem; color:var(--ink-soft); }
+.nav ul a:hover{ color:var(--ink); }
+@media (max-width:640px){ .nav ul{ display:none; } }
+
+main{ padding:64px 0 96px; }
+h1.page-title{ font-family:var(--serif); font-weight:500; font-size:clamp(2rem,4vw,2.8rem); margin:0 0 10px; }
+p.page-sub{ color:var(--ink-soft); max-width:52ch; margin:0 0 48px; }
+
+.post-list{ display:flex; flex-direction:column; }
+.post-row{
+  display:grid; grid-template-columns:120px 1fr; gap:24px; padding:26px 0; border-top:1px solid var(--rule); text-decoration:none;
+}
+.post-list .post-row:last-child{ border-bottom:1px solid var(--rule); }
+.post-row .date{ color:var(--ink-soft); font-size:.85rem; padding-top:3px; }
+.post-row h2{ font-family:var(--serif); font-weight:500; font-size:1.3rem; margin:0 0 8px; color:var(--ink); }
+.post-row p{ margin:0; color:var(--ink-soft); font-size:.94rem; max-width:60ch; }
+.post-row:hover h2{ color:var(--mark); }
+@media (max-width:600px){ .post-row{ grid-template-columns:1fr; gap:4px; } }
+
+.empty-note{ color:var(--ink-soft); font-size:.9rem; padding:20px 0; border-top:1px solid var(--rule); }
+
+footer.site-footer{ padding:28px 0 40px; text-align:center; color:var(--ink-soft); font-size:.82rem; border-top:1px solid var(--rule); }
+footer.site-footer a{ text-decoration:underline; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a href="../" class="mark-logo">Sami<span>.</span>Uddin</a>
+    <ul>
+      <li><a href="../#services">Services</a></li>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="./">Blog</a></li>
+      <li><a href="../#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <h1 class="page-title">Notes on writing that works</h1>
+    <p class="page-sub">Short, practical posts on SEO content, copywriting, and AI-assisted production — written from actual client work, not theory.</p>
+
+    <div class="post-list">
+      <a class="post-row" href="./seo-content-that-actually-ranks.html">
+        <span class="date">16 Sep 2026</span>
+        <div>
+          <h2>SEO content that actually ranks: the structure I use on every article</h2>
+          <p>A practical breakdown of how I plan, structure, and optimize an article before writing a single sentence of the draft.</p>
+        </div>
+      </a>
+
+      <!-- Add new posts above this line, newest first -->
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  © <span id="year"></span> Sami Uddin. <a href="../">Back to portfolio</a>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>
