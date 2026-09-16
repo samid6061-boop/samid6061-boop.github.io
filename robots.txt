@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://samiuddin.github.io/sitemap.xml
+Sitemap: https://samid6061-boop.github.io/sitemap.xml
