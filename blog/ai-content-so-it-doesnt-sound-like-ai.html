@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Brief AI Content So It Doesn't Sound Like AI | Sami Uddin</title>
+<meta name="description" content="A practical checklist for briefing and editing AI-assisted content so it reads like it was written by someone who knows the subject — not a generic AI draft.">
+<meta name="keywords" content="AI content editing checklist, how to make AI content sound human, AI content editing, prompt engineering for content">
+<link rel="canonical" href="https://samid6061-boop.github.io/blog/brief-ai-content-so-it-doesnt-sound-like-ai.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Brief AI Content So It Doesn't Sound Like AI">
+<meta property="og:description" content="A practical checklist for briefing and editing AI-assisted content so it reads like a subject-matter expert wrote it.">
+<meta property="og:url" content="https://samid6061-boop.github.io/blog/brief-ai-content-so-it-doesnt-sound-like-ai.html">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Brief AI Content So It Doesn't Sound Like AI: A Practical Editing Checklist",
+  "author": {"@type": "Person", "name": "Sami Uddin"},
+  "datePublished": "2026-09-21",
+  "mainEntityOfPage": "https://samid6061-boop.github.io/blog/brief-ai-content-so-it-doesnt-sound-like-ai.html"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#0f1116; --paper-raised:#171a21; --ink:#eeeee8; --ink-soft:#a7a8a3;
+  --rule:#2b2f38; --mark:#f5d90a; --mark-ink:#1a1a12; --green:#5fd98d; --coral:#ff7a6e;
+  --radius:10px; --serif:'Fraunces','Georgia',serif; --sans:'Inter',system-ui,sans-serif; --maxw:720px;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){ --paper:#f7f5f0; --paper-raised:#ffffff; --ink:#181818; --ink-soft:#5c5c56; --rule:#ddd8cc; --mark-ink:#1a1a12; }
+}
+:root[data-theme="light"]{ --paper:#f7f5f0; --paper-raised:#ffffff; --ink:#181818; --ink-soft:#5c5c56; --rule:#ddd8cc; --mark-ink:#1a1a12; }
+*{box-sizing:border-box;}
+body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased; }
+a{ color:var(--mark); }
+.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
+header.site{ position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--rule); }
+.nav{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1080px; margin:0 auto; }
+.nav .mark-logo{ font-family:var(--serif); font-weight:600; font-size:1.15rem; text-decoration:none; color:var(--ink); }
+.nav .mark-logo span{ color:var(--mark); }
+.nav ul{ list-style:none; display:flex; gap:28px; margin:0; padding:0; }
+.nav ul a{ text-decoration:none; font-size:.93rem; color:var(--ink-soft); }
+.nav ul a:hover{ color:var(--ink); }
+@media (max-width:640px){ .nav ul{ display:none; } }
+article{ padding:56px 0 40px; }
+.byline{ color:var(--ink-soft); font-size:.85rem; margin:0 0 14px; }
+h1.title{ font-family:var(--serif); font-weight:500; font-size:clamp(1.8rem,4vw,2.5rem); line-height:1.18; margin:0 0 20px; }
+.lede{ font-size:1.1rem; color:var(--ink-soft); margin:0 0 36px; }
+article h2{ font-family:var(--serif); font-weight:500; font-size:1.35rem; margin:40px 0 14px; }
+article p{ margin:0 0 18px; color:var(--ink); }
+article ul, article ol{ margin:0 0 18px; padding-left:22px; color:var(--ink); }
+article li{ margin-bottom:8px; }
+article strong{ color:var(--ink); }
+.checklist{ background:var(--paper-raised); border:1px solid var(--rule); border-radius:var(--radius); padding:22px 22px 6px; margin:24px 0; }
+.checklist p{ margin:0 0 14px; }
+.author-box{ background:var(--paper-raised); border:1px solid var(--rule); border-radius:var(--radius); padding:22px; margin-top:44px; }
+.author-box p{ margin:0; font-size:.92rem; color:var(--ink-soft); }
+.back-link{ display:inline-block; margin-top:30px; color:var(--ink-soft); text-decoration:none; font-size:.9rem; }
+.back-link:hover{ color:var(--ink); }
+footer.site-footer{ padding:28px 0 40px; text-align:center; color:var(--ink-soft); font-size:.82rem; border-top:1px solid var(--rule); }
+footer.site-footer a{ text-decoration:underline; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a href="../" class="mark-logo">Sami<span>.</span>Uddin</a>
+    <ul>
+      <li><a href="../#services">Services</a></li>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="./">Blog</a></li>
+      <li><a href="../#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="wrap">
+<article>
+  <p class="byline">Sami Uddin · 21 Sep 2026 · 6 min read</p>
+  <h1 class="title">How to brief AI content so it doesn't sound like AI</h1>
+  <p class="lede">The debate over "AI vs. human content" misses the actual question most businesses have: how do you use AI without publishing something that reads like everyone else's AI draft? Here's the brief-and-edit process I use.</p>
+
+  <h2>The real problem isn't AI — it's the default prompt</h2>
+  <p>Most AI-generated content sounds the same because most people prompt it the same way: a topic and a word count. The model fills the gap with the most statistically average version of that topic — which is exactly why it reads as generic. The fix happens before generation, not after.</p>
+
+  <h2>What to put in the brief before you generate anything</h2>
+  <div class="checklist">
+    <p>☐ <strong>One specific example or number</strong> the AI couldn't invent on its own — a real client result, a real process step, a real objection you hear.</p>
+    <p>☐ <strong>A point of view</strong>, not just a topic. "Explain email marketing" produces filler. "Explain why most small business email marketing fails in the first two weeks" produces an argument.</p>
+    <p>☐ <strong>Who it's for and what they already know</strong> — writing for a beginner and an expert with the same prompt produces mush that serves neither.</p>
+    <p>☐ <strong>What to leave out</strong> — telling the model to skip the obvious intro paragraph and generic conclusion cuts most of the filler before it's even written.</p>
+  </div>
+
+  <h2>What to fix in the edit pass — every time</h2>
+  <ul>
+    <li><strong>Cut the hedge words.</strong> "It's important to note," "in today's fast-paced world," "can vary depending on" — these are filler the model adds by default. Delete them; the sentence almost always survives.</li>
+    <li><strong>Replace generic claims with specific ones.</strong> "This can improve results" becomes "this cut our client's bounce rate by 18% in six weeks" — using a real number if you have one.</li>
+    <li><strong>Break up symmetrical paragraphs.</strong> AI drafts often produce paragraphs of near-identical length. Real writing varies — a one-line paragraph next to a longer one reads as human because it is.</li>
+    <li><strong>Add one thing only you would know.</strong> A client detail, an industry quirk, a mistake you've seen people make. This single addition does more for authenticity than any amount of line-editing.</li>
+  </ul>
+
+  <h2>Why this matters beyond just "sounding human"</h2>
+  <p>Multiple 2026 studies on AI content performance agree on one pattern: AI-assisted content with substantial human editing performs close to fully human-written content, while unedited AI output consistently underperforms — especially at the very top of search results, where specificity and original insight matter most. The gap isn't about AI versus human. It's about whether a real point of view made it into the piece.</p>
+
+  <h2>A simple test before you publish</h2>
+  <p>Read the piece and ask: could this exact paragraph have been written about a different company in the same industry, with just the name swapped? If yes, it needs one more pass. Content that couldn't be about anyone else is the content that ranks, gets shared, and actually sounds like you.</p>
+
+  <div class="author-box">
+    <p>Written by <a href="../#about">Sami Uddin</a>, who works at exactly this intersection — AI-assisted content and video, edited and prompt-engineered by hand. <a href="https://www.fiverr.com/sami5d200" target="_blank" rel="noopener">Hire me on Fiverr →</a></p>
+  </div>
+
+  <a class="back-link" href="./">← Back to all posts</a>
+</article>
+</main>
+
+<footer class="site-footer">
+  © <span id="year"></span> Sami Uddin. <a href="../">Back to portfolio</a>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>
