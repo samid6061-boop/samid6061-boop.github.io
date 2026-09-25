@@ -288,6 +288,61 @@ p.section-sub{ color:var(--ink-soft); margin:0 0 40px; max-width:52ch; }
 footer.site-footer{
   padding:28px 0 40px; text-align:center; color:var(--ink-soft); font-size:.82rem;
 }
+/* ---------- CREATIVE WORK ---------- */
+.creative-intro{ max-width:62ch; color:var(--ink-soft); margin:0 0 36px; }
+.creative-intro strong{ color:var(--ink); }
+
+.yt-channel-card{
+  display:flex; align-items:center; gap:16px; background:var(--paper-raised); border:1px solid var(--rule);
+  border-radius:var(--radius); padding:18px 20px; margin-bottom:36px; flex-wrap:wrap;
+}
+.yt-channel-card .yt-stats{ display:flex; gap:22px; flex-wrap:wrap; margin-left:auto; }
+.yt-channel-card .yt-stats div{ text-align:right; }
+.yt-channel-card .yt-stats b{ font-family:var(--serif); font-size:1.3rem; display:block; }
+.yt-channel-card .yt-stats span{ font-size:.76rem; color:var(--ink-soft); }
+.yt-channel-card a.yt-link{ font-size:.88rem; font-weight:600; color:var(--ink); text-decoration:none; border-bottom:1px solid var(--mark); }
+
+.pillars{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin:0 0 48px; }
+@media (max-width:700px){ .pillars{ grid-template-columns:1fr; } }
+.pillar{ background:var(--paper-raised); border:1px solid var(--rule); border-radius:var(--radius); padding:22px; }
+.pillar .num{ font-family:var(--serif); color:var(--mark); font-size:1.6rem; display:block; margin-bottom:8px; }
+.pillar h4{ margin:0 0 8px; font-size:1.02rem; }
+.pillar p{ margin:0; color:var(--ink-soft); font-size:.9rem; }
+
+.timeline{ position:relative; padding-left:28px; margin-bottom:16px; }
+.timeline::before{
+  content:''; position:absolute; left:6px; top:6px; bottom:6px; width:2px; background:var(--rule);
+}
+.t-item{ position:relative; padding-bottom:30px; }
+.t-item:last-child{ padding-bottom:0; }
+.t-item::before{
+  content:''; position:absolute; left:-28px; top:4px; width:12px; height:12px; border-radius:50%;
+  background:var(--mark); border:3px solid var(--paper);
+}
+.t-date{ font-size:.78rem; color:var(--mark); font-weight:600; letter-spacing:.02em; margin-bottom:4px; }
+.t-item h4{ margin:0 0 6px; font-size:1.02rem; font-family:var(--serif); font-weight:500; }
+.t-item p{ margin:0; color:var(--ink-soft); font-size:.92rem; max-width:56ch; }
+.t-item .stat-row{ display:flex; gap:18px; margin-top:8px; flex-wrap:wrap; }
+.t-item .stat-row span{ font-size:.82rem; color:var(--ink); background:var(--paper-raised); border:1px solid var(--rule); padding:3px 10px; border-radius:20px; }
+
+.closing-note{ border-left:3px solid var(--mark); padding-left:20px; margin:44px 0 48px; }
+.closing-note p{ color:var(--ink); font-size:1rem; margin:0 0 12px; }
+.closing-note p:last-child{ margin-bottom:0; }
+.closing-note a{ color:var(--mark); }
+
+.services-yt{ display:grid; gap:12px; }
+.services-yt details{
+  background:var(--paper-raised); border:1px solid var(--rule); border-radius:var(--radius); padding:16px 20px;
+}
+.services-yt summary{
+  cursor:pointer; font-family:var(--serif); font-weight:500; font-size:1.05rem; list-style:none;
+  display:flex; justify-content:space-between; align-items:center; gap:12px;
+}
+.services-yt summary::-webkit-details-marker{ display:none; }
+.services-yt summary::after{ content:'+'; color:var(--mark); font-size:1.3rem; flex:none; }
+.services-yt details[open] summary::after{ content:'−'; }
+.services-yt p{ margin:12px 0 0; color:var(--ink-soft); font-size:.92rem; }
+
 </style>
 </head>
 <body>
@@ -445,7 +500,106 @@ footer.site-footer{
       </div>
     </div>
   </section>
+<section id="creative-work">
+    <div class="wrap">
+      <h2 class="section-title">My Creative Work</h2>
+      <p class="creative-intro">Two years ago I was a 25-year-old graduate with a degree and no opportunities — watching the job market and the wider economy make "get a stable job" feel like a joke, and getting more demotivated by the month. This section isn't a case study. It's what actually happened after I decided to stop waiting for an opportunity and build one instead.</p>
 
+      <div class="yt-channel-card">
+        <div>
+          <div style="font-family:var(--serif);font-weight:500;font-size:1.1rem;">The Pavilion Report</div>
+          <a class="yt-link" href="https://youtube.com/@The_Pavilion_Report" target="_blank" rel="noopener">youtube.com/@The_Pavilion_Report ↗</a>
+        </div>
+        <div class="yt-stats">
+          <div><b>1.6M+</b><span>total views</span></div>
+          <div><b>900+</b><span>subscribers</span></div>
+        </div>
+      </div>
+
+      <div class="pillars">
+        <div class="pillar">
+          <span class="num">01</span>
+          <h4>Consistency</h4>
+          <p>Not talent, not luck. Uploading through the weeks nobody was watching is the actual reason there was still a channel left when things finally moved.</p>
+        </div>
+        <div class="pillar">
+          <span class="num">02</span>
+          <h4>AI</h4>
+          <p>No team, no editors, no budget. AI tools did the work a whole crew would normally do — research, scripting help, editing, graphics — for one person working alone.</p>
+        </div>
+        <div class="pillar">
+          <span class="num">03</span>
+          <h4>One laptop</h4>
+          <p>That's the entire equipment list. No studio, no camera setup. If the barrier in your head is "I don't have the right gear," it was never really about the gear.</p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="t-item">
+          <div class="t-date">SEP 2025</div>
+          <h4>Started from zero</h4>
+          <p>Launched The Pavilion Report as a cricket-only channel — no audience, no strategy yet, just a decision to stop waiting and start uploading.</p>
+        </div>
+        <div class="t-item">
+          <div class="t-date">FEB 2026</div>
+          <h4>Early traction, inconsistent views</h4>
+          <p>Growth was slow and uneven — some uploads barely moved, and it would have been easy to quit here. This is where I actually learned YouTube SEO, by testing titles, tags, and thumbnails against real data instead of theory.</p>
+          <div class="stat-row"><span>209 subscribers</span><span>176.5K lifetime views</span></div>
+        </div>
+        <div class="t-item">
+          <div class="t-date">BREAKOUT</div>
+          <h4>One well-targeted video changed the trajectory</h4>
+          <p>A single piece of content, built around a specific trending search moment, pulled in over 25,000 views in one day — proof that targeting beats volume, and that showing up on the quiet days pays off.</p>
+        </div>
+        <div class="t-item">
+          <div class="t-date">MAR 2026</div>
+          <h4>First major tournament run</h4>
+          <p>Covered a full cricket tournament end-to-end and signed off with 560,000+ views across that coverage window, crossing 100,000+ views in a single 48-hour stretch during the ICC Men's T20 World Cup.</p>
+          <div class="stat-row"><span>387 subscribers</span><span>560K+ views (tournament run)</span></div>
+        </div>
+        <div class="t-item">
+          <div class="t-date">EXPANSION</div>
+          <h4>Tested the approach outside cricket</h4>
+          <p>Branched into FIFA World Cup 2026 content to prove the method wasn't luck specific to one niche. Sustained 40,000+ views a week for several consecutive weeks on a completely new topic.</p>
+        </div>
+        <div class="t-item">
+          <div class="t-date">JUN 2026 — TODAY</div>
+          <h4>900+ subscribers, 1.6M+ lifetime views</h4>
+          <p>Still growing, still testing. Every service I offer around YouTube SEO and channel growth comes from running this channel myself — not just studying how it's supposed to work.</p>
+          <div class="stat-row"><span>794 subscribers (Jun)</span><span>101.4K views in 7 days</span></div>
+        </div>
+      </div>
+
+      <div class="closing-note">
+        <p><strong>If you're where I was</strong> — graduated, qualified, demotivated, watching the country's economy make every plan feel pointless — I'm not going to tell you it was easy. It wasn't. But it was possible with a laptop, one decision, and showing up consistently on the days it felt like nothing was working.</p>
+        <p>If any part of this — writing, SEO, or building something on YouTube — is the "laptop and one decision" you're looking for, I'm happy to talk. <a href="#contact">Reach out</a>, no pressure.</p>
+      </div>
+
+      <h3 style="font-family:var(--serif);font-weight:500;font-size:1.15rem;margin:0 0 18px;">What I can help your channel with</h3>
+      <div class="services-yt">
+        <details>
+          <summary>YouTube Channel Setup & Branding</summary>
+          <p>Profile, banner, About section, and channel layout built to look professional and be SEO-ready from your very first upload — not retrofitted later.</p>
+        </details>
+        <details>
+          <summary>YouTube SEO & Keyword Research</summary>
+          <p>Titles, descriptions, and tags built around what people are actually searching for on YouTube — the same research process behind the breakout videos above.</p>
+        </details>
+        <details>
+          <summary>Channel Audit & Growth Strategy</summary>
+          <p>A review of what's currently holding a channel back — weak titles, missed keywords, poor retention points — with a prioritized list of what to fix first.</p>
+        </details>
+        <details>
+          <summary>Monetization Roadmap</summary>
+          <p>A realistic, step-by-step plan toward AdSense eligibility and sponsorship-readiness — what to focus on now versus later.</p>
+        </details>
+        <details>
+          <summary>Thumbnail & Title Optimization</summary>
+          <p>Click-through rate is a ranking signal most channels ignore. Small, testable changes to thumbnails and titles that compound over time.</p>
+        </details>
+      </div>
+    </div>
+  </section>
   <section>
     <div class="wrap">
       <div class="stats">
