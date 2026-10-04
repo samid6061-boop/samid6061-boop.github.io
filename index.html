@@ -342,6 +342,21 @@ footer.site-footer{
 .services-yt summary::after{ content:'+'; color:var(--mark); font-size:1.3rem; flex:none; }
 .services-yt details[open] summary::after{ content:'−'; }
 .services-yt p{ margin:12px 0 0; color:var(--ink-soft); font-size:.92rem; }
+   
+/* ---------- PUBLISHED WORK ---------- */
+.published-intro{ max-width:62ch; color:var(--ink-soft); margin:0 0 32px; }
+.published-intro strong{ color:var(--ink); }
+.pub-list{ display:flex; flex-direction:column; }
+.pub-row{
+  display:grid; grid-template-columns:140px 1fr; gap:20px; padding:16px 0; border-top:1px solid var(--rule);
+  text-decoration:none; align-items:baseline;
+}
+.pub-list .pub-row:last-child{ border-bottom:1px solid var(--rule); }
+.pub-row .pub-date{ color:var(--ink-soft); font-size:.8rem; }
+.pub-row .pub-title{ color:var(--ink); font-size:.96rem; }
+.pub-row:hover .pub-title{ color:var(--mark); }
+.pub-row .pub-arrow{ color:var(--ink-soft); font-size:.8rem; margin-left:6px; }
+@media (max-width:600px){ .pub-row{ grid-template-columns:1fr; gap:3px; } }
 
 </style>
 </head>
