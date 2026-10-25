@@ -358,6 +358,26 @@ footer.site-footer{
 .pub-row .pub-arrow{ color:var(--ink-soft); font-size:.8rem; margin-left:6px; }
 @media (max-width:600px){ .pub-row{ grid-template-columns:1fr; gap:3px; } }
 
+/* ---------- PROOF STRIP ---------- */
+.proof{ background:var(--paper-raised); border-bottom:1px solid var(--rule); }
+.proof-grid{ display:grid; grid-template-columns:repeat(3,1fr); }
+.proof-item{
+  display:block; padding:22px 20px; text-decoration:none; color:var(--ink);
+  border-left:1px solid var(--rule); transition:background .15s;
+}
+.proof-item:first-child{ border-left:none; padding-left:0; }
+.proof-item b{
+  display:block; font-family:var(--serif); font-weight:500;
+  font-size:clamp(1.5rem,4vw,2.1rem); line-height:1.1; margin-bottom:4px;
+}
+.proof-item span{ display:block; font-size:.85rem; color:var(--ink-soft); line-height:1.35; }
+.proof-item:hover b{ color:var(--mark); }
+@media (max-width:560px){
+  .proof-item{ padding:16px 10px; }
+  .proof-item:first-child{ padding-left:0; }
+  .proof-item span{ font-size:.75rem; }
+}
+  
 </style>
 </head>
 <body>
@@ -419,6 +439,22 @@ footer.site-footer{
     </div>
   </section>
 
+    <section class="proof" aria-label="Proof at a glance">
+    <div class="wrap proof-grid">
+      <a class="proof-item" href="https://www.fiverr.com/sami5d200" target="_blank" rel="noopener">
+        <b>4.9★</b>
+        <span>Fiverr rating</span>
+      </a>
+      <a class="proof-item" href="https://youtube.com/@The_Pavilion_Report" target="_blank" rel="noopener">
+        <b>1.6M+</b>
+        <span>YouTube views on my own channel</span>
+      </a>
+      <a class="proof-item" href="#published-work">
+        <b>10</b>
+        <span>columns published on UrduPoint</span>
+      </a>
+    </div>
+  </section>
   <section id="about">
     <div class="wrap about-grid">
       <figure class="about-photo">
