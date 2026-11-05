@@ -70,4 +70,9 @@
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>
 </url>
+<url>
+  <loc>https://samid6061-boop.github.io/shorts-title-checker.html</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
+</url>
   </urlset>
