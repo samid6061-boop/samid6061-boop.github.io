@@ -635,7 +635,7 @@ figure.testi{ margin:0; display:flex; flex-direction:column; }
         <span>Fiverr rating</span>
       </a>
       <a class="proof-item" href="https://youtube.com/@The_Pavilion_Report" target="_blank" rel="noopener">
-        <b>2.1M+</b>
+        <b data-live="views-short">2.0M+</b>
         <span>YouTube views on my own channel</span>
       </a>
       <a class="proof-item" href="#published-work">
@@ -749,8 +749,8 @@ figure.testi{ margin:0; display:flex; flex-direction:column; }
           <a class="yt-link" href="https://youtube.com/@The_Pavilion_Report" target="_blank" rel="noopener">youtube.com/@The_Pavilion_Report ↗</a>
         </div>
         <div class="yt-stats">
-          <div><b>2.1M+</b><span>total views</span></div>
-          <div><b>900+</b><span>subscribers</span></div>
+          <div><b data-live="views-short">2.0M+</b><span>total views</span></div>
+          <div><b data-live="subs">1,120</b><span>subscribers</span></div>
         </div>
       </div>
 <!-- INTERACTIVE 3D YOUTUBE GROWTH GRAPH -->
@@ -758,7 +758,7 @@ figure.testi{ margin:0; display:flex; flex-direction:column; }
   <div class="yt-journey-top">
     <div>
       <div class="yt-journey-badge"><i></i> Real Channel Trajectory • Sep 2025 – Nov 2026</div>
-      <h3 class="yt-journey-heading">From 0 to 2.0M+ Views on One Laptop</h3>
+      <h3 class="yt-journey-heading">From 0 to <span data-live="views-short">2.0M+</span> Views on One Laptop</h3>
     </div>
     <div class="yt-counters">
       <div class="yt-stat-item">
@@ -837,7 +837,7 @@ figure.testi{ margin:0; display:flex; flex-direction:column; }
         </div>
         <div class="t-item">
           <div class="t-date">JUN 2026 — TODAY</div>
-          <h4>900+ subscribers, 2.1M+ lifetime views</h4>
+          <h4><span data-live="subs">1,120</span> subscribers, <span data-live="views-short">2.0M+</span> lifetime views</h4>
           <p>Still growing, still testing. Every service I offer around YouTube SEO and channel growth comes from running this channel myself — not just studying how it's supposed to work.</p>
           <div class="stat-row"><span>794 subscribers (Jun)</span><span>101.4K views in 7 days</span></div>
         </div>
@@ -1005,6 +1005,20 @@ demoSwitch.addEventListener('click', ()=>{
   demoLabel.textContent = !pressed ? 'Showing the edit' : 'Show the edit';
 });
 </script>
+<script>
+/* Live YouTube numbers: stats.json is refreshed by GitHub Actions. If it can't load, the numbers written in the page stay. */
+(function(){
+  var fmtShort=function(n){return n>=1e6?(n/1e6).toFixed(1)+'M+':n>=1e3?Math.floor(n/1e3)+'K+':String(n);};
+  var fmt={ 'views-short':fmtShort, 'subs':function(n){return n.toLocaleString('en-US');} };
+  fetch('stats.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():Promise.reject();}).then(function(d){
+    if(!d||!(d.views>0)||!(d.subs>0))return;
+    window.PAV_STATS=window.PAV_STATS||{}; window.PAV_STATS.views=d.views; window.PAV_STATS.subs=d.subs;
+    [].forEach.call(document.querySelectorAll('[data-live]'),function(el){
+      var k=el.getAttribute('data-live'),v=k==='subs'?d.subs:d.views; if(fmt[k])el.textContent=fmt[k](v);
+    });
+  }).catch(function(){});
+})();
+</script>
 <script src="nav.js" defer></script>
 <script src="clock.js" defer></script>
 <script src="quiz.js" defer></script>
@@ -1012,6 +1026,7 @@ demoSwitch.addEventListener('click', ()=>{
 (function() {
   const canvas = document.getElementById('pavilionCanvas');
   if (!canvas) return;
+  const PAV = window.PAV_STATS = window.PAV_STATS || { views: 2043307, subs: 1120 };
   const ctx = canvas.getContext('2d');
   const wrap = document.getElementById('pavCanvasWrap');
   const viewsEl = document.getElementById('pavViews');
@@ -1035,7 +1050,7 @@ demoSwitch.addEventListener('click', ()=>{
     { at: 0.02, tag: "SEP 2025 • START", title: "Started from zero", desc: "Launched The Pavilion Report with one laptop — no team, no budget." },
     { at: 0.36, tag: "BREAKOUT • 25K+ IN 1 DAY", title: "First Viral Spike", desc: "Targeted search SEO hit the algorithm during ICC T20 World Cup coverage." },
     { at: 0.64, tag: "EXPANSION • FIFA 2026", title: "40K+ Weekly Views", desc: "Proved the SEO system works outside cricket with sustained football traffic." },
-    { at: 0.92, tag: "TODAY • MILESTONE", title: "2.0M+ Views & 1,122 Subs", desc: "100% organic channel growth powering every client SEO strategy I build." }
+    { at: 0.92, tag: "TODAY • MILESTONE", title: "LIVE", desc: "100% organic channel growth powering every client SEO strategy I build." }
   ];
 
   let w, h, dpr;
@@ -1107,7 +1122,6 @@ demoSwitch.addEventListener('click', ()=>{
   }
 
   function formatViews(num) {
-    if (num >= 2000000) return "2.0M+";
     if (num >= 1000000) return (num / 1000000).toFixed(2) + "M";
     if (num >= 1000) return Math.floor(num / 1000) + "K";
     return Math.floor(num).toString();
@@ -1191,14 +1205,14 @@ demoSwitch.addEventListener('click', ()=>{
       lastBeat = activeBeat;
       const b = storyBeats[activeBeat];
       toastTag.textContent = b.tag;
-      toastTitle.textContent = b.title;
+      toastTitle.textContent = b.title === "LIVE" ? (formatViews(PAV.views) + " Views & " + PAV.subs.toLocaleString() + " Subs") : b.title;
       toastDesc.textContent = b.desc;
       toast.classList.add('show');
     }
 
     // Update Numbers
-    viewsEl.textContent = formatViews(Math.pow(progress, 1.3) * 2000000);
-    subsEl.textContent = Math.floor(Math.pow(progress, 1.45) * 1122).toLocaleString();
+    viewsEl.textContent = formatViews(Math.pow(progress, 1.3) * PAV.views);
+    subsEl.textContent = Math.floor(Math.pow(progress, 1.45) * PAV.subs).toLocaleString();
 
     requestAnimationFrame(drawFrame);
   }
