@@ -1,0 +1,32 @@
+name: Update YouTube stats
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # har 6 ghante baad
+  workflow_dispatch:         # haath se chalane ka button
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch channel stats
+        env:
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+        run: |
+          curl -s "https://www.googleapis.com/youtube/v3/channels?part=statistics&forHandle=The_Pavilion_Report&key=$YT_API_KEY" > r.json
+          jq -e '.items[0].statistics.viewCount' r.json > /dev/null
+          jq '{views:(.items[0].statistics.viewCount|tonumber), subs:(.items[0].statistics.subscriberCount|tonumber), updated:(now|todate)}' r.json > stats.json
+          rm r.json
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add stats.json
+          git diff --cached --quiet || git commit -m "Update YouTube stats"
+          git push
