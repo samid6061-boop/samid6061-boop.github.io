@@ -35,6 +35,79 @@
 }
 </script>
 
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How much does it cost?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "An SEO-optimized 1,000-word article or blog post starts from $50. Other services are quoted per brief, so send me what you need and I'll confirm the price before we start."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How fast do you reply?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Within 6 hours. Email is the best way to reach me, and my Fiverr inbox works too."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I hire you?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Message me on Fiverr, or email me a short brief. Tell me the goal, who it's for, and your deadline. I'll reply with questions or a plan."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What do you need from me to start?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The goal and the audience, not the word count. A link to your website or channel helps, and so does any example you like."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How many revisions do I get?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Unlimited reasonable revisions, until the work is something you'd publish yourself."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Which languages do you write in?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "English and Urdu. I work async, so time zones are rarely a problem."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can you handle writing and video together?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. I do SEO content, copywriting, AI-assisted video and YouTube growth myself, so the brief only has to be explained once."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can you help with my YouTube channel?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Channel setup and branding, YouTube SEO and keyword research, channel audits, a monetization roadmap, and thumbnail and title optimization. It all comes from running my own channel, The Pavilion Report."
+   }
+  }
+ ]
+}
+</script>
+
 <style>
 :root{
   --paper:#0f1116;
@@ -567,6 +640,18 @@ figure.testi{ margin:0; display:flex; flex-direction:column; }
 .testi blockquote{ margin:0; flex:1; }
 .testi figcaption{ color:var(--ink-soft); font-size:.82rem; }
 .testi figcaption b{ color:var(--ink); font-weight:600; }
+@media (min-width:721px){.nav ul a.nav-cta{background:var(--mark);color:var(--mark-ink);padding:7px 14px;border-radius:8px;font-weight:600}.nav ul a.nav-cta:hover{color:var(--mark-ink);filter:brightness(1.08)}}
+.price-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+@media (max-width:640px){ .price-grid{ grid-template-columns:1fr; } }
+.price-card{ background:var(--paper-raised); border:1px solid var(--rule); border-radius:var(--radius); padding:22px; display:flex; flex-direction:column; gap:10px; }
+.price-card.featured{ border-color:var(--mark); }
+.price-card h3{ margin:0; font-family:var(--serif); font-weight:500; font-size:1.1rem; }
+.price{ font-family:var(--serif); font-size:2rem; line-height:1.1; }
+.price.quote{ font-size:1.3rem; color:var(--ink-soft); }
+.price-card p{ margin:0 0 6px; color:var(--ink-soft); font-size:.9rem; flex:1; }
+.price-card .btn{ align-self:flex-start; }
+.price-note{ margin:18px 0 0; color:var(--ink-soft); font-size:.85rem; }
+.reply-note{ margin:14px 0 0; color:var(--ink-soft); font-size:.85rem; }
 </style>
 </head>
 <body>
@@ -577,11 +662,13 @@ figure.testi{ margin:0; display:flex; flex-direction:column; }
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
+      <li><a href="#pricing">Pricing</a></li>
       <li><a href="#work">Work</a></li>
       <li><a href="#creative-work">My Work</a></li>
       <li><a href="#published-work">Published</a></li>
       <li><a href="#testimonials">Reviews</a></li>
       <li><a href="blog/">Blog</a></li>
+      <li><a class="nav-cta" href="#contact">Hire me</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -688,6 +775,40 @@ figure.testi{ margin:0; display:flex; flex-direction:column; }
           <div><h3>Prompt Engineering</h3><p>Setting up the prompts and workflows that let a team keep producing on-brand AI content after I've handed it off.</p></div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <h2 class="section-title">Pricing</h2>
+      <p class="section-sub">Clear starting points in US dollars. Send a brief and I'll confirm the exact price before we start.</p>
+      <div class="price-grid">
+        <div class="price-card featured">
+          <h3>SEO article or blog post</h3>
+          <div class="price">From $50</div>
+          <p>1,000 words, SEO optimized. Researched against real search intent and structured to rank.</p>
+          <a class="btn primary" href="mailto:samid6061@gmail.com?subject=SEO%20article%20enquiry&body=Hi%20Sami%2C%0D%0A%0D%0AWhat%20I%20need%3A%0D%0AWho%20it%20is%20for%3A%0D%0ADeadline%3A%0D%0ALink%20to%20my%20website%20or%20channel%3A%0D%0A">Order this</a>
+        </div>
+        <div class="price-card">
+          <h3>Copywriting</h3>
+          <div class="price quote">Custom quote</div>
+          <p>Landing pages, ads and email copy, priced by the page.</p>
+          <a class="btn ghost" href="mailto:samid6061@gmail.com?subject=Copywriting%20enquiry&body=Hi%20Sami%2C%0D%0A%0D%0AWhat%20I%20need%3A%0D%0AWho%20it%20is%20for%3A%0D%0ADeadline%3A%0D%0ALink%20to%20my%20website%20or%20channel%3A%0D%0A">Ask for a quote</a>
+        </div>
+        <div class="price-card">
+          <h3>YouTube growth</h3>
+          <div class="price quote">Custom quote</div>
+          <p>Channel setup, YouTube SEO, audits and a monetization roadmap.</p>
+          <a class="btn ghost" href="mailto:samid6061@gmail.com?subject=YouTube%20growth%20enquiry&body=Hi%20Sami%2C%0D%0A%0D%0AWhat%20I%20need%3A%0D%0AWho%20it%20is%20for%3A%0D%0ADeadline%3A%0D%0ALink%20to%20my%20website%20or%20channel%3A%0D%0A">Ask for a quote</a>
+        </div>
+        <div class="price-card">
+          <h3>AI-assisted video</h3>
+          <div class="price quote">Custom quote</div>
+          <p>Greeting videos, promo clips and product explainers, priced by length.</p>
+          <a class="btn ghost" href="mailto:samid6061@gmail.com?subject=AI%20video%20enquiry&body=Hi%20Sami%2C%0D%0A%0D%0AWhat%20I%20need%3A%0D%0AWho%20it%20is%20for%3A%0D%0ADeadline%3A%0D%0ALink%20to%20my%20website%20or%20channel%3A%0D%0A">Ask for a quote</a>
+        </div>
+      </div>
+      <p class="price-note">Final price depends on length, research depth and revisions. Replies within 6 hours.</p>
     </div>
   </section>
 
@@ -964,9 +1085,34 @@ figure.testi{ margin:0; display:flex; flex-direction:column; }
     </div>
   </section>
 
+  <section id="faq">
+    <div class="wrap">
+      <h2 class="section-title">Questions before you hire</h2>
+      <p class="section-sub">The short answers. Anything else, just ask.</p>
+      <div class="services-yt">
+        <details><summary>How much does it cost?</summary><p>An SEO-optimized 1,000-word article or blog post starts from $50. Other services are quoted per brief, so send me what you need and I'll confirm the price before we start.</p></details>
+        <details><summary>How fast do you reply?</summary><p>Within 6 hours. Email is the best way to reach me, and my Fiverr inbox works too.</p></details>
+        <details><summary>How do I hire you?</summary><p>Message me on Fiverr, or email me a short brief. Tell me the goal, who it's for, and your deadline. I'll reply with questions or a plan.</p></details>
+        <details><summary>What do you need from me to start?</summary><p>The goal and the audience, not the word count. A link to your website or channel helps, and so does any example you like.</p></details>
+        <details><summary>How many revisions do I get?</summary><p>Unlimited reasonable revisions, until the work is something you'd publish yourself.</p></details>
+        <details><summary>Which languages do you write in?</summary><p>English and Urdu. I work async, so time zones are rarely a problem.</p></details>
+        <details><summary>Can you handle writing and video together?</summary><p>Yes. I do SEO content, copywriting, AI-assisted video and YouTube growth myself, so the brief only has to be explained once.</p></details>
+        <details><summary>Can you help with my YouTube channel?</summary><p>Yes. Channel setup and branding, YouTube SEO and keyword research, channel audits, a monetization roadmap, and thumbnail and title optimization. It all comes from running my own channel, The Pavilion Report.</p></details>
+      </div>
+    </div>
+  </section>
+
   <section id="contact">
     <div class="wrap contact-box">
-      <h2 class="section-title">Have a brief? Let's start there.</h2>
+      <div>
+        <h2 class="section-title">Have a brief? Let's start there.</h2>
+        <p class="section-sub" style="margin:0 0 22px">Tell me the goal, the audience, and the deadline. That's all I need to begin.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="https://www.fiverr.com/sami5d200" target="_blank" rel="noopener">Hire me on Fiverr →</a>
+          <a class="btn ghost" href="mailto:samid6061@gmail.com?subject=Project%20enquiry&body=Hi%20Sami%2C%0D%0A%0D%0AWhat%20I%20need%3A%0D%0AWho%20it%20is%20for%3A%0D%0ADeadline%3A%0D%0ALink%20to%20my%20website%20or%20channel%3A%0D%0A">Email a brief</a>
+        </div>
+        <p class="reply-note">I reply to every brief within 6 hours.</p>
+      </div>
       <div class="contact-links">
         <a href="https://www.fiverr.com/sami5d200" target="_blank" rel="noopener">Fiverr profile ↗</a>
         <a href="mailto:samid6061@gmail.com">samid6061@gmail.com</a>
