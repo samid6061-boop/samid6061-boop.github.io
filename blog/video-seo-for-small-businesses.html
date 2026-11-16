@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%8D%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <title>Video SEO for Small Businesses: How to Make Short Videos Actually Get Found | Sami Uddin</title>
 <meta name="description" content="Most small-business videos never get discovered because nobody optimizes them. A practical video SEO checklist for titles, descriptions, captions, and thumbnails that actually get found.">
 <meta name="keywords" content="video SEO, how to optimize videos for search, short video SEO, YouTube SEO for small business">
@@ -39,7 +40,7 @@
 :root[data-theme="light"]{ --paper:#f7f5f0; --paper-raised:#ffffff; --ink:#181818; --ink-soft:#5c5c56; --rule:#ddd8cc; --mark-ink:#1a1a12; }
 *{box-sizing:border-box;}
 body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased; }
-a{ color:var(--mark); }
+a{ color:var(--link); }
 .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
 header.site{ position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--rule); }
 .nav{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1080px; margin:0 auto; }
@@ -66,6 +67,9 @@ article strong{ color:var(--ink); }
 .back-link:hover{ color:var(--ink); }
 footer.site-footer{ padding:28px 0 40px; text-align:center; color:var(--ink-soft); font-size:.82rem; border-top:1px solid var(--rule); }
 footer.site-footer a{ text-decoration:underline; }
+:root{ --link:#f5d90a; }
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --link:#7a5f00; } }
+:root[data-theme="light"]{ --link:#7a5f00; }
 </style>
 </head>
 <body>
@@ -84,7 +88,7 @@ footer.site-footer a{ text-decoration:underline; }
 
 <main class="wrap">
 <article>
-  <p class="byline">Sami Uddin · 21 Sep 2026 · 6 min read</p>
+  <p class="byline">Sami Uddin · 21 Sep 2026 · 3 min read</p>
   <h1 class="title">Video SEO for small businesses: how to make short videos actually get found</h1>
   <p class="lede">A well-made video that nobody searches into is a well-made video that doesn't work. Most small businesses spend their whole budget on production and none on the five-minute setup that decides whether the video is findable at all.</p>
 
@@ -120,5 +124,6 @@ footer.site-footer a{ text-decoration:underline; }
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
+<script src="../nav.js" defer></script>
 </body>
 </html>
