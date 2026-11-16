@@ -58,7 +58,7 @@
 :root[data-theme="light"]{ --paper:#f7f5f0; --paper-raised:#ffffff; --ink:#181818; --ink-soft:#5c5c56; --rule:#ddd8cc; --mark-ink:#1a1a12; }
 *{box-sizing:border-box;}
 body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased; }
-a{ color:var(--mark); }
+a{ color:var(--link); }
 .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
 header.site{ position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--rule); }
 .nav{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1080px; margin:0 auto; }
@@ -79,7 +79,7 @@ article li{ margin-bottom:8px; }
 article strong{ color:var(--ink); }
 .step{ background:var(--paper-raised); border:1px solid var(--rule); border-radius:var(--radius); padding:20px 22px; margin:0 0 14px; }
 .step h3{ margin:0 0 8px; font-size:1.02rem; font-family:var(--serif); font-weight:500; }
-.step h3 span{ color:var(--mark); margin-right:8px; }
+.step h3 span{ color:var(--link); margin-right:8px; }
 .step p{ margin:0; color:var(--ink-soft); font-size:.94rem; }
 .callout{ background:var(--paper-raised); border:1px solid var(--rule); border-left:3px solid var(--mark); border-radius:var(--radius); padding:20px; margin:24px 0; }
 .callout p{ margin:0; color:var(--ink); font-size:.95rem; }
@@ -94,6 +94,9 @@ article strong{ color:var(--ink); }
 .back-link:hover{ color:var(--ink); }
 footer.site-footer{ padding:28px 0 40px; text-align:center; color:var(--ink-soft); font-size:.82rem; border-top:1px solid var(--rule); }
 footer.site-footer a{ text-decoration:underline; }
+:root{ --link:#f5d90a; }
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --link:#7a5f00; } }
+:root[data-theme="light"]{ --link:#7a5f00; }
 </style>
 </head>
 <body>
@@ -112,7 +115,7 @@ footer.site-footer a{ text-decoration:underline; }
 
 <main class="wrap">
 <article>
-  <p class="byline">Sami Uddin · 10 Oct 2026 · 6 min read</p>
+  <p class="byline">Sami Uddin · 10 Oct 2026 · 4 min read</p>
   <h1 class="title">How to SEO your YouTube channel: a one-time setup checklist</h1>
   <p class="lede">Video SEO is something you repeat on every upload. Channel SEO is different: you do it once, and it supports everything you publish afterward. It also takes about an hour, which makes it the cheapest improvement most channels never make.</p>
 
@@ -161,7 +164,7 @@ footer.site-footer a{ text-decoration:underline; }
   </div>
 
   <h2>What to do after setup</h2>
-  <p>Once the channel page is in order, the work shifts to the videos themselves: the opening, the title, and retention. For Shorts specifically, see <a href="./youtube-seo-for-shorts.html">YouTube SEO for Shorts</a>. For titles, descriptions, captions, and thumbnails on longer videos, see  For a tick-as-you-go version to use on every upload, see the <a href="./youtube-seo-checklist.html">YouTube SEO checklist</a>.
+  <p>Once the channel page is in order, the work shifts to the videos themselves: the opening, the title, and retention. For Shorts specifically, see <a href="./youtube-seo-for-shorts.html">YouTube SEO for Shorts</a>. For titles, descriptions, captions, and thumbnails on longer videos, and for a tick-as-you-go version to use on every upload, see the <a href="./youtube-seo-checklist.html">YouTube SEO checklist</a>.</p>
   <p>I've applied this approach to my own channel, <a href="../#creative-work">The Pavilion Report</a>, which has passed 1.6M views. If you'd like this done for your channel instead of doing it yourself, that's what my channel setup and audit service covers.</p>
 
   <h2>Frequently asked questions</h2>
@@ -195,5 +198,7 @@ footer.site-footer a{ text-decoration:underline; }
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
+<script src="../nav.js" defer></script>
 </body>
 </html>
+
