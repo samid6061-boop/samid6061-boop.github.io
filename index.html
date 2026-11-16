@@ -272,7 +272,7 @@ header.site{
   border: 1px solid var(--rule);
   border-radius: 8px;
   overflow: hidden;
-  cursor: crosshair;
+  cursor: grab;
 }
 
 #pavilionCanvas {
@@ -652,6 +652,16 @@ figure.testi{ margin:0; display:flex; flex-direction:column; }
 .price-card .btn{ align-self:flex-start; }
 .price-note{ margin:18px 0 0; color:var(--ink-soft); font-size:.85rem; }
 .reply-note{ margin:14px 0 0; color:var(--ink-soft); font-size:.85rem; }
+.yt-controls{ display:flex; align-items:center; gap:14px; margin-top:14px; }
+#pavSlider{ flex:1; min-width:0; accent-color:var(--mark); cursor:pointer; height:28px; }
+.yt-chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.yt-chip{ font:inherit; font-size:.82rem; color:var(--ink); background:transparent; border:1px solid var(--rule); border-radius:999px; padding:6px 13px; cursor:pointer; transition:border-color .15s,background .15s; }
+.yt-chip:hover{ border-color:var(--ink-soft); }
+.yt-chip[aria-pressed="true"]{ border-color:var(--mark); background:color-mix(in srgb,var(--mark) 14%,var(--paper-raised)); }
+.yt-controls button:focus-visible,.yt-chip:focus-visible,#pavSlider:focus-visible{ outline:2px solid var(--mark); outline-offset:2px; }
+.yt-canvas-wrap.dragging{ cursor:grabbing; }
+#pavilionCanvas{ touch-action:pan-y; user-select:none; -webkit-user-select:none; }
+#pavilionCanvas:focus-visible{ outline:2px solid var(--mark); outline-offset:-2px; }
 </style>
 </head>
 <body>
@@ -902,8 +912,20 @@ figure.testi{ margin:0; display:flex; flex-direction:column; }
     </div>
   </div>
 
+  <div class="yt-controls">
+    <button type="button" class="yt-replay-btn" id="pavPlayBtn">⏸ Pause</button>
+    <input type="range" id="pavSlider" min="0" max="1000" step="1" value="0" aria-label="Scrub through the channel's growth, September 2025 to today">
+  </div>
+  <div class="yt-chips" id="pavChips" role="group" aria-label="Jump to a milestone"></div>
+  <div class="yt-chips yt-viewbtns" role="group" aria-label="3D view controls">
+    <button type="button" class="yt-chip" id="pavZoomOut" aria-label="Zoom out">− Zoom out</button>
+    <button type="button" class="yt-chip" id="pavZoomIn" aria-label="Zoom in">+ Zoom in</button>
+    <button type="button" class="yt-chip" id="pavSpin" aria-pressed="false">⟳ Auto-rotate</button>
+    <button type="button" class="yt-chip" id="pavResetView">Reset view</button>
+  </div>
+
   <div class="yt-journey-bar">
-    <span>Move cursor to tilt 3D view • Auto-plays on scroll</span>
+    <span>Drag the chart to rotate it 360° • Pinch, buttons or Ctrl+scroll to zoom • Plays on its own as you scroll</span>
     <button type="button" class="yt-replay-btn" id="pavReplayBtn">↻ Replay Trajectory</button>
   </div>
 </div>
@@ -1202,6 +1224,7 @@ demoSwitch.addEventListener('click', ()=>{
   let w, h, dpr;
   let progress = 0;
   let started = false;
+  let paused = false;
   let lastBeat = -1;
   let tiltX = 0, tiltY = 0;
 
@@ -1225,15 +1248,21 @@ demoSwitch.addEventListener('click', ()=>{
     };
   }
 
-  function project(nx, ny, nz) {
-    const cx = w * 0.52 + tiltX * 18;
-    const baseY = h * 0.80 + tiltY * 12;
-    const spanX = w * 0.80;
-    const maxH = h * 0.58;
+  // Interactive 3D camera: drag to rotate 360 degrees, zoom with buttons, pinch or Ctrl+scroll
+  const view = { yaw: 0.5, pitch: 0.5, zoom: 1 };
+  const VIEW_DEFAULT = { yaw: 0.5, pitch: 0.5, zoom: 1 };
+  let zoomNow = 1, spin = false, dragging = false;
 
-    const x = cx + (nx - 0.5) * spanX + nz * 38;
-    const y = baseY - ny * maxH + (nx - 0.5) * 32 + nz * 20;
-    return { x, y };
+  function project(nx, ny, nz) {
+    const X = (nx - 0.5) * 2, Y = ny * 1.2 - 0.6, Z = nz * 0.6;
+    const yaw = view.yaw + tiltX * 0.05, pitch = view.pitch + tiltY * 0.03;
+    const cy = Math.cos(yaw), sy = Math.sin(yaw);
+    const x1 = X * cy + Z * sy, z1 = -X * sy + Z * cy;
+    const cp = Math.cos(pitch), sp = Math.sin(pitch);
+    const y2 = Y * cp - z1 * sp, z2 = Y * sp + z1 * cp;
+    const k = 5 / (5 - z2);
+    const scale = Math.min(w * 0.33, h * 0.52) * zoomNow;
+    return { x: w * 0.5 + x1 * k * scale, y: h * 0.52 - y2 * k * scale };
   }
 
   function drawIsoFloor(colors) {
@@ -1279,42 +1308,77 @@ demoSwitch.addEventListener('click', ()=>{
 
     drawIsoFloor(colors);
 
-    if (started && progress < 1) {
+    if (started && !paused && progress < 1) {
       progress = Math.min(1, progress + 0.0045);
     }
+
+    zoomNow += (view.zoom - zoomNow) * 0.2;
+    if (spin && !dragging) view.yaw += 0.006;
 
     const total = curveData.length;
     const exactIdx = progress * (total - 1);
     const full = Math.floor(exactIdx);
     const frac = exactIdx - full;
+    const DEP = 0.22;
 
-    const pts = [];
-    for (let i = 0; i <= full; i++) {
-      pts.push(project(i / (total - 1), curveData[i], 0));
-    }
-    if (full < total - 1) {
-      const ny = curveData[full] + (curveData[full + 1] - curveData[full]) * frac;
-      pts.push(project((full + frac) / (total - 1), ny, 0));
+    function ptsAt(nz) {
+      const a = [];
+      for (let i = 0; i <= full; i++) a.push(project(i / (total - 1), curveData[i], nz));
+      if (full < total - 1) {
+        const ny = curveData[full] + (curveData[full + 1] - curveData[full]) * frac;
+        a.push(project((full + frac) / (total - 1), ny, nz));
+      }
+      return a;
     }
 
-    if (pts.length > 1) {
-      // Gradient Fill under the curve
-      const startBase = project(0, 0, 0);
-      const endBase = project(progress, 0, 0);
+    const frontPts = ptsAt(DEP), backPts = ptsAt(-DEP);
+    const frontVisible = Math.cos(view.yaw + tiltX * 0.05) > 0;
+    const near = frontVisible ? frontPts : backPts;
+    const far = frontVisible ? backPts : frontPts;
+    const nearZ = frontVisible ? DEP : -DEP, farZ = -nearZ;
+
+    function fillFace(arr, nz, alpha) {
+      const s0 = project(0, 0, nz), e0 = project(progress, 0, nz);
       const grad = ctx.createLinearGradient(0, h * 0.15, 0, h * 0.85);
-      grad.addColorStop(0, 'rgba(245, 217, 10, 0.30)');
-      grad.addColorStop(0.65, 'rgba(95, 217, 141, 0.08)');
+      grad.addColorStop(0, 'rgba(245, 217, 10, 0.34)');
+      grad.addColorStop(0.65, 'rgba(95, 217, 141, 0.10)');
       grad.addColorStop(1, 'rgba(15, 17, 22, 0)');
-
       ctx.beginPath();
-      ctx.moveTo(startBase.x, startBase.y);
-      pts.forEach(p => ctx.lineTo(p.x, p.y));
-      ctx.lineTo(endBase.x, endBase.y);
+      ctx.moveTo(s0.x, s0.y);
+      arr.forEach(p => ctx.lineTo(p.x, p.y));
+      ctx.lineTo(e0.x, e0.y);
       ctx.closePath();
+      ctx.globalAlpha = alpha;
       ctx.fillStyle = grad;
       ctx.fill();
+      ctx.globalAlpha = 1;
+    }
 
-      // Main Glowing Line in your signature Yellow (--mark)
+    if (near.length > 1) {
+      // far face, then the top surface, then the near face with the glowing line
+      fillFace(far, farZ, 0.45);
+      ctx.strokeStyle = colors.mark;
+      ctx.globalAlpha = 0.35;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      far.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+      ctx.stroke();
+
+      ctx.fillStyle = colors.mark;
+      ctx.globalAlpha = 0.16;
+      for (let i = 0; i < near.length - 1; i++) {
+        ctx.beginPath();
+        ctx.moveTo(far[i].x, far[i].y);
+        ctx.lineTo(far[i + 1].x, far[i + 1].y);
+        ctx.lineTo(near[i + 1].x, near[i + 1].y);
+        ctx.lineTo(near[i].x, near[i].y);
+        ctx.closePath();
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+
+      fillFace(near, nearZ, 1);
+
       ctx.save();
       ctx.shadowColor = colors.mark;
       ctx.shadowBlur = 14;
@@ -1322,19 +1386,16 @@ demoSwitch.addEventListener('click', ()=>{
       ctx.lineWidth = 3;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
-
       ctx.beginPath();
-      pts.forEach((p, idx) => idx === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+      near.forEach((p, idx) => idx === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
       ctx.stroke();
       ctx.restore();
 
-      // Leading Beacon Dot
-      const tip = pts[pts.length - 1];
+      const tip = near[near.length - 1];
       ctx.fillStyle = colors.green;
       ctx.beginPath();
       ctx.arc(tip.x, tip.y, 5, 0, Math.PI * 2);
       ctx.fill();
-
       ctx.strokeStyle = colors.mark;
       ctx.lineWidth = 2;
       ctx.beginPath();
@@ -1354,11 +1415,21 @@ demoSwitch.addEventListener('click', ()=>{
       toastTitle.textContent = b.title === "LIVE" ? (formatViews(PAV.views) + " Views & " + PAV.subs.toLocaleString() + " Subs") : b.title;
       toastDesc.textContent = b.desc;
       toast.classList.add('show');
+    } else if (activeBeat === -1 && lastBeat !== -1) {
+      lastBeat = -1;
+      toast.classList.remove('show');
     }
 
     // Update Numbers
     viewsEl.textContent = formatViews(Math.pow(progress, 1.3) * PAV.views);
     subsEl.textContent = Math.floor(Math.pow(progress, 1.45) * PAV.subs).toLocaleString();
+
+    // Keep the controls in sync with the animation
+    const sv = Math.round(progress * 1000);
+    if (+slider.value !== sv) slider.value = sv;
+    const label = progress >= 1 ? '↻ Replay' : (paused ? '▶ Play' : '⏸ Pause');
+    if (playBtn.textContent !== label) playBtn.textContent = label;
+    chips.forEach((c, i) => c.setAttribute('aria-pressed', String(i === activeBeat)));
 
     requestAnimationFrame(drawFrame);
   }
@@ -1387,7 +1458,116 @@ demoSwitch.addEventListener('click', ()=>{
     progress = 0;
     lastBeat = -1;
     started = true;
+    paused = false;
     toast.classList.remove('show');
+  });
+
+  // ---- Visitor controls: play/pause, slider, milestone chips ----
+  const playBtn = document.getElementById('pavPlayBtn');
+  const slider = document.getElementById('pavSlider');
+  const chipsEl = document.getElementById('pavChips');
+  const chipNames = ['Start', 'Breakout', 'Expansion', 'Today'];
+  const chips = storyBeats.map((b, i) => {
+    const el = document.createElement('button');
+    el.type = 'button';
+    el.className = 'yt-chip';
+    el.textContent = chipNames[i] || b.tag;
+    el.setAttribute('aria-pressed', 'false');
+    el.addEventListener('click', () => {
+      started = true;
+      paused = true;
+      progress = Math.min(1, b.at + 0.004);
+      lastBeat = -2;
+    });
+    chipsEl.appendChild(el);
+    return el;
+  });
+
+  // ---- 3D view: drag to rotate, pinch / Ctrl+scroll / buttons to zoom ----
+  const clampZoom = z => Math.max(0.55, Math.min(2.6, z));
+  const pointers = new Map();
+  let pinchStart = 0, pinchZoom = 1;
+  canvas.tabIndex = 0;
+  canvas.setAttribute('role', 'img');
+  canvas.setAttribute('aria-label', "3D growth chart of The Pavilion Report. Drag to rotate, use plus and minus to zoom, arrow keys also rotate.");
+
+  canvas.addEventListener('pointerdown', e => {
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    canvas.setPointerCapture(e.pointerId);
+    dragging = pointers.size === 1;
+    wrap.classList.toggle('dragging', dragging);
+    if (pointers.size === 2) {
+      const [a, b] = [...pointers.values()];
+      pinchStart = Math.hypot(a.x - b.x, a.y - b.y) || 1;
+      pinchZoom = view.zoom;
+    }
+  });
+  canvas.addEventListener('pointermove', e => {
+    const p = pointers.get(e.pointerId);
+    if (!p) return;
+    const dx = e.clientX - p.x, dy = e.clientY - p.y;
+    p.x = e.clientX; p.y = e.clientY;
+    if (pointers.size === 2) {
+      const [a, b] = [...pointers.values()];
+      view.zoom = clampZoom(pinchZoom * (Math.hypot(a.x - b.x, a.y - b.y) / pinchStart));
+    } else {
+      view.yaw += dx * 0.008;
+      view.pitch = Math.max(0.08, Math.min(1.35, view.pitch + dy * 0.006));
+    }
+  });
+  const endPointer = e => {
+    pointers.delete(e.pointerId);
+    dragging = pointers.size === 1;
+    if (!pointers.size) wrap.classList.remove('dragging');
+  };
+  canvas.addEventListener('pointerup', endPointer);
+  canvas.addEventListener('pointercancel', endPointer);
+  canvas.addEventListener('wheel', e => {
+    if (!(e.ctrlKey || e.metaKey)) return; // plain scrolling keeps scrolling the page
+    e.preventDefault();
+    view.zoom = clampZoom(view.zoom * (e.deltaY < 0 ? 1.1 : 0.91));
+  }, { passive: false });
+  canvas.addEventListener('keydown', e => {
+    const k = e.key;
+    if (k === 'ArrowLeft') view.yaw -= 0.12;
+    else if (k === 'ArrowRight') view.yaw += 0.12;
+    else if (k === 'ArrowUp') view.pitch = Math.min(1.35, view.pitch + 0.08);
+    else if (k === 'ArrowDown') view.pitch = Math.max(0.08, view.pitch - 0.08);
+    else if (k === '+' || k === '=') view.zoom = clampZoom(view.zoom * 1.15);
+    else if (k === '-' || k === '_') view.zoom = clampZoom(view.zoom / 1.15);
+    else return;
+    e.preventDefault();
+  });
+
+  const spinBtn = document.getElementById('pavSpin');
+  document.getElementById('pavZoomIn').addEventListener('click', () => { view.zoom = clampZoom(view.zoom * 1.25); });
+  document.getElementById('pavZoomOut').addEventListener('click', () => { view.zoom = clampZoom(view.zoom / 1.25); });
+  document.getElementById('pavResetView').addEventListener('click', () => {
+    Object.assign(view, VIEW_DEFAULT);
+    spin = false;
+    spinBtn.setAttribute('aria-pressed', 'false');
+  });
+  spinBtn.addEventListener('click', () => {
+    spin = !spin;
+    spinBtn.setAttribute('aria-pressed', String(spin));
+  });
+
+  slider.addEventListener('input', () => {
+    started = true;
+    paused = true;
+    progress = slider.value / 1000;
+  });
+
+  playBtn.addEventListener('click', () => {
+    started = true;
+    if (progress >= 1) {
+      progress = 0;
+      lastBeat = -1;
+      toast.classList.remove('show');
+      paused = false;
+    } else {
+      paused = !paused;
+    }
   });
 
   window.addEventListener('resize', resize);
