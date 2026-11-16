@@ -40,7 +40,7 @@
 :root[data-theme="light"]{ --paper:#f7f5f0; --paper-raised:#ffffff; --ink:#181818; --ink-soft:#5c5c56; --rule:#ddd8cc; --mark-ink:#1a1a12; }
 *{box-sizing:border-box;}
 body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased; }
-a{ color:var(--mark); }
+a{ color:var(--link); }
 .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 24px; }
 header.site{ position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--rule); }
 .nav{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1080px; margin:0 auto; }
@@ -67,6 +67,9 @@ article strong{ color:var(--ink); }
 .back-link:hover{ color:var(--ink); }
 footer.site-footer{ padding:28px 0 40px; text-align:center; color:var(--ink-soft); font-size:.82rem; border-top:1px solid var(--rule); }
 footer.site-footer a{ text-decoration:underline; }
+:root{ --link:#f5d90a; }
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --link:#7a5f00; } }
+:root[data-theme="light"]{ --link:#7a5f00; }
 </style>
 </head>
 <body>
@@ -85,7 +88,7 @@ footer.site-footer a{ text-decoration:underline; }
 
 <main class="wrap">
 <article>
-  <p class="byline">Sami Uddin · 21 Sep 2026 · 6 min read</p>
+  <p class="byline">Sami Uddin · 21 Sep 2026 · 3 min read</p>
   <h1 class="title">How to brief AI content so it doesn't sound like AI</h1>
   <p class="lede">The debate over "AI vs. human content" misses the actual question most businesses have: how do you use AI without publishing something that reads like everyone else's AI draft? Here's the brief-and-edit process I use.</p>
 
@@ -109,7 +112,7 @@ footer.site-footer a{ text-decoration:underline; }
   </ul>
 
   <h2>Why this matters beyond just "sounding human"</h2>
-  <p>Multiple 2026 studies on AI content performance agree on one pattern: AI-assisted content with substantial human editing performs close to fully human-written content, while unedited AI output consistently underperforms — especially at the very top of search results, where specificity and original insight matter most. The gap isn't about AI versus human. It's about whether a real point of view made it into the piece.</p>
+  <p>My view, and it is a view rather than a study: AI-assisted content that gets substantial human editing tends to hold up far better than unedited output, and the gap is widest where specificity and original insight matter most. The difference isn't AI versus human. It's whether a real point of view made it into the piece.</p>
 
   <h2>A simple test before you publish</h2>
   <p>Read the piece and ask: could this exact paragraph have been written about a different company in the same industry, with just the name swapped? If yes, it needs one more pass. Content that couldn't be about anyone else is the content that ranks, gets shared, and actually sounds like you.</p>
@@ -128,5 +131,6 @@ footer.site-footer a{ text-decoration:underline; }
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
+<script src="../nav.js" defer></script>
 </body>
 </html>
