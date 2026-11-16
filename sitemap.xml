@@ -85,4 +85,9 @@
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>
 </url>
-  </urlset>
+    <url>
+    <loc>https://samid6061-boop.github.io/my-story.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>
