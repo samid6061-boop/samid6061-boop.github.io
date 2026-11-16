@@ -11,7 +11,7 @@
   var SERVICES = {
     writing: {
       name: 'Written content and SEO',
-      text: 'SEO blog writing and copywriting. I have written 50+ blog articles on topics like cryptocurrency, finance, and personal well-being, for clients across Asia, Europe, and the Americas.',
+      text: 'SEO blog writing and copywriting. I have written blog articles on topics like cryptocurrency, finance, and personal well-being, for clients across Asia, Europe, and the Americas.',
       see: { label: 'Read my blog', href: 'blog/' },
       short: 'SEO blog writing and copywriting'
     },
@@ -75,24 +75,24 @@
     '.sq{background:var(--paper-raised);border:1px solid var(--rule);border-radius:var(--radius);padding:24px;}',
     '.sq fieldset{border:0;margin:0 0 22px;padding:0;min-width:0;}',
     '.sq legend{font-family:var(--serif);font-size:1.05rem;margin:0 0 12px;padding:0;}',
-    '.sq-num{color:var(--mark);margin-right:8px;}',
+    '.sq-num{color:var(--link,var(--mark));margin-right:8px;}',
     '.sq-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;}',
     '@media (max-width:560px){.sq-opts{grid-template-columns:1fr;}}',
     '.sq-opt{display:block;position:relative;}',
     '.sq-opt input{position:absolute;opacity:0;top:0;left:0;width:100%;height:100%;margin:0;cursor:pointer;}',
     '.sq-opt span{display:block;padding:12px 14px;border:1px solid var(--rule);border-radius:var(--radius);font-size:.93rem;color:var(--ink);background:var(--paper);transition:border-color .15s,background .15s;}',
     '.sq-opt:hover span{border-color:var(--ink-soft);}',
-    '.sq-opt input:checked + span{border-color:var(--mark);background:color-mix(in srgb,var(--mark) 12%,var(--paper));}',
+    '.sq-opt input:checked + span{border-color:var(--link,var(--mark));background:color-mix(in srgb,var(--mark) 12%,var(--paper));}',
     '.sq-opt input:focus-visible + span{outline:2px solid var(--mark);outline-offset:2px;}',
     '.sq-result{margin-top:6px;padding-top:20px;border-top:1px solid var(--rule);}',
-    '.sq-kicker{font-size:.78rem;color:var(--mark);font-weight:600;margin-bottom:6px;}',
+    '.sq-kicker{font-size:.78rem;color:var(--link,var(--mark));font-weight:600;margin-bottom:6px;}',
     '.sq-result h3{font-family:var(--serif);font-weight:500;font-size:1.35rem;margin:0 0 8px;}',
     '.sq-result p{color:var(--ink-soft);font-size:.95rem;margin:0 0 12px;}',
     '.sq-result p.sq-also{font-size:.9rem;}',
     '.sq-actions{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 8px;}',
     '.sq-btn{display:inline-block;padding:11px 18px;border-radius:var(--radius);border:1px solid var(--rule);color:var(--ink);text-decoration:none;font-weight:600;font-size:.93rem;}',
     '.sq-btn:hover{border-color:var(--ink-soft);}',
-    '.sq-btn.primary{background:var(--mark);border-color:var(--mark);color:var(--mark-ink);}',
+    '.sq-btn.primary{background:var(--mark);border-color:var(--link,var(--mark));color:var(--mark-ink);}',
     '.sq-result p.sq-note{font-size:.8rem;margin:6px 0 0;}',
     '.sq-reset{background:none;border:none;color:var(--ink-soft);text-decoration:underline;cursor:pointer;font:inherit;font-size:.85rem;padding:0;margin-top:12px;}'
   ].join('\n');
