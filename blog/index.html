@@ -11,6 +11,12 @@
 <meta property="og:title" content="Blog — Sami Uddin">
 <meta property="og:description" content="Practical notes on SEO content, copywriting, and AI-assisted production.">
 <meta property="og:url" content="https://samid6061-boop.github.io/blog/">
+<meta property="og:site_name" content="Sami Uddin">
+<meta property="og:image" content="https://samid6061-boop.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://samid6061-boop.github.io/og-image.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +53,7 @@ p.page-sub{ color:var(--ink-soft); max-width:52ch; margin:0 0 48px; }
 .post-row{
   display:grid; grid-template-columns:120px 1fr; gap:24px; padding:26px 0; border-top:1px solid var(--rule); text-decoration:none;
 }
-.post-list .post-row:last-child{ border-bottom:1px solid var(--rule); }
+.post-list{ border-bottom:1px solid var(--rule); }
 .post-row .date{ color:var(--ink-soft); font-size:.85rem; padding-top:3px; }
 .post-row h2{ font-family:var(--serif); font-weight:500; font-size:1.3rem; margin:0 0 8px; color:var(--ink); }
 .post-row p{ margin:0; color:var(--ink-soft); font-size:.94rem; max-width:60ch; }
@@ -61,6 +67,14 @@ footer.site-footer a{ text-decoration:underline; }
 :root{ --link:#f5d90a; }
 @media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --link:#7a5f00; } }
 :root[data-theme="light"]{ --link:#7a5f00; }
+[hidden]{ display:none!important; }
+.pager{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; margin:36px 0 0; }
+.pager button{ font:inherit; font-size:.95rem; min-width:44px; height:44px; padding:0 14px; border-radius:var(--radius); border:1px solid var(--rule); background:var(--paper-raised); color:var(--ink); cursor:pointer; transition:border-color .15s; }
+.pager button:hover:not(:disabled){ border-color:var(--ink-soft); }
+.pager button[aria-current="page"]{ background:var(--mark); border-color:var(--mark); color:var(--mark-ink); font-weight:700; }
+.pager button:disabled{ opacity:.4; cursor:default; }
+.pager button:focus-visible{ outline:2px solid var(--mark); outline-offset:2px; }
+.pager-info{ text-align:center; color:var(--ink-soft); font-size:.85rem; margin:14px 0 0; }
 </style>
 </head>
 <body>
@@ -184,6 +198,8 @@ footer.site-footer a{ text-decoration:underline; }
 
       <!-- Add new posts above this line, newest first -->
     </div>
+    <nav class="pager" id="pager" aria-label="Blog pages" hidden></nav>
+    <p class="pager-info" id="pagerInfo" aria-live="polite"></p>
   </div>
 </main>
 
@@ -192,7 +208,32 @@ footer.site-footer a{ text-decoration:underline; }
 </footer>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  <script src="../nav.js" defer></script>
+  <script>
+/* Blog pagination: shows 5 posts per page. Add a post to the list and the page numbers update by themselves. */
+(function(){
+  var PER=5, list=document.querySelector('.post-list'); if(!list) return;
+  var rows=[].slice.call(list.querySelectorAll('.post-row')), pages=Math.ceil(rows.length/PER);
+  if(pages<2) return;
+  var pager=document.getElementById('pager'), info=document.getElementById('pagerInfo'), cur=1;
+  var reduce=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function fromHash(){ var m=/^#page-(\d+)$/.exec(location.hash); var n=m?parseInt(m[1],10):1; return Math.min(Math.max(n,1),pages); }
+  function render(scroll){
+    rows.forEach(function(r,i){ r.hidden = (Math.floor(i/PER)+1)!==cur; });
+    var h='<button type="button" data-p="'+(cur-1)+'"'+(cur===1?' disabled':'')+' aria-label="Previous page">\u2190 Prev</button>';
+    for(var p=1;p<=pages;p++){ h+='<button type="button" data-p="'+p+'" aria-label="Page '+p+'"'+(p===cur?' aria-current="page"':'')+'>'+p+'</button>'; }
+    h+='<button type="button" data-p="'+(cur+1)+'"'+(cur===pages?' disabled':'')+' aria-label="Next page">Next \u2192</button>';
+    pager.innerHTML=h; pager.hidden=false;
+    var from=(cur-1)*PER+1, to=Math.min(cur*PER,rows.length);
+    info.textContent='Showing posts '+from+'\u2013'+to+' of '+rows.length+' \u00b7 Page '+cur+' of '+pages;
+    if(scroll) list.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+  }
+  function go(n){ cur=n; history.pushState(null,'',n===1?location.pathname+location.search:'#page-'+n); render(true); }
+  pager.addEventListener('click',function(e){ var b=e.target.closest('button[data-p]'); if(!b||b.disabled) return; go(parseInt(b.getAttribute('data-p'),10)); });
+  window.addEventListener('popstate',function(){ cur=fromHash(); render(false); });
+  cur=fromHash(); render(false);
+})();
+</script>
+<script src="../nav.js" defer></script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d6bd5df94dcc4ceebc8a75e52034380b"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
