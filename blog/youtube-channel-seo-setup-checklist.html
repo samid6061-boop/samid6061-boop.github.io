@@ -315,7 +315,7 @@ footer.site-footer a{ text-decoration:underline; }
 <script>
 /* Live YouTube numbers from stats.json; if it can't load, the numbers written in the page stay. */
 (function(){
-  var short=function(n){return n>=1e6?(n/1e6).toFixed(1)+'M+':n>=1e3?Math.floor(n/1e3)+'K+':String(n);};
+  var short=function(n){return n>=1e6?(Math.floor(n/1e5)/10).toFixed(1)+'M+':n>=1e3?Math.floor(n/1e3)+'K+':String(n);};
   fetch('../stats.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():Promise.reject();}).then(function(d){
     if(!d||!(d.views>0)||!(d.subs>0))return;
     [].forEach.call(document.querySelectorAll('[data-live]'),function(el){
