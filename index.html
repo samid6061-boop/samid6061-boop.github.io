@@ -680,6 +680,7 @@ figure.testi{ margin:0; display:flex; flex-direction:column; }
 :root{ --link:#f5d90a; --good:#5fd98d; }
 @media (prefers-color-scheme:light){ :root:not([data-theme="dark"]){ --link:#7a5f00; --good:#1f7a46; } }
 :root[data-theme="light"]{ --link:#7a5f00; --good:#1f7a46; }
+.yt-note{ margin:12px 0 0; font-size:.8rem; color:var(--ink-soft); line-height:1.5; }
 </style>
 </head>
 <body>
@@ -909,7 +910,7 @@ figure.testi{ margin:0; display:flex; flex-direction:column; }
 <div class="yt-journey-box" id="ytJourneyBox">
   <div class="yt-journey-top">
     <div>
-      <div class="yt-journey-badge"><i></i> Real Channel Trajectory • Sep 2025 – Nov 2026</div>
+      <div class="yt-journey-badge"><i></i> Channel Trajectory • Sep 2025 – <span data-live="month">Nov 2026</span></div>
       <h3 class="yt-journey-heading">From 0 to <span data-live="views-short">2.0M+</span> Views on One Laptop</h3>
     </div>
     <div class="yt-counters">
@@ -949,6 +950,7 @@ figure.testi{ margin:0; display:flex; flex-direction:column; }
     <span>Drag the chart to rotate it 360° • Pinch, buttons or Ctrl+scroll to zoom • Plays on its own as you scroll</span>
     <button type="button" class="yt-replay-btn" id="pavReplayBtn">↻ Replay Trajectory</button>
   </div>
+  <p class="yt-note">These are real milestones, and more are coming. The counters above show the channel's real numbers and refresh automatically. The curve between the milestones is drawn to show the journey and is not updated daily.</p>
 </div>
 
 
@@ -1127,13 +1129,13 @@ io.observe(u);
 <script>
 /* Live YouTube numbers: stats.json is refreshed by GitHub Actions. If it can't load, the numbers written in the page stay. */
 (function(){
-  var fmtShort=function(n){return n>=1e6?(n/1e6).toFixed(1)+'M+':n>=1e3?Math.floor(n/1e3)+'K+':String(n);};
+  var fmtShort=function(n){return n>=1e6?(Math.floor(n/1e5)/10).toFixed(1)+'M+':n>=1e3?Math.floor(n/1e3)+'K+':String(n);};
   var fmt={ 'views-short':fmtShort, 'subs':function(n){return n.toLocaleString('en-US');} };
   fetch('stats.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():Promise.reject();}).then(function(d){
     if(!d||!(d.views>0)||!(d.subs>0))return;
     window.PAV_STATS=window.PAV_STATS||{}; window.PAV_STATS.views=d.views; window.PAV_STATS.subs=d.subs;
     [].forEach.call(document.querySelectorAll('[data-live]'),function(el){
-      var k=el.getAttribute('data-live'),v=k==='subs'?d.subs:d.views; if(fmt[k])el.textContent=fmt[k](v);
+      var k=el.getAttribute('data-live'); if(k==='month'){ if(d.updated){ var dt=new Date(d.updated); if(!isNaN(dt)) el.textContent=dt.toLocaleString('en-US',{month:'short',year:'numeric',timeZone:'UTC'}); } return; } var v=k==='subs'?d.subs:d.views; if(fmt[k])el.textContent=fmt[k](v);
     });
   }).catch(function(){});
 })();
