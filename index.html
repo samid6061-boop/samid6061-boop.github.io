@@ -681,6 +681,13 @@ figure.testi{ margin:0; display:flex; flex-direction:column; }
 @media (prefers-color-scheme:light){ :root:not([data-theme="dark"]){ --link:#7a5f00; --good:#1f7a46; } }
 :root[data-theme="light"]{ --link:#7a5f00; --good:#1f7a46; }
 .yt-note{ margin:12px 0 0; font-size:.8rem; color:var(--ink-soft); line-height:1.5; }
+.blog-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+@media (max-width:800px){ .blog-grid{ grid-template-columns:1fr; } }
+.blog-card{ display:flex; flex-direction:column; gap:8px; background:var(--paper-raised); border:1px solid var(--rule); border-radius:var(--radius); padding:20px; text-decoration:none; color:var(--ink); transition:border-color .15s, transform .15s; }
+.blog-card:hover{ border-color:var(--ink-soft); transform:translateY(-2px); }
+.blog-card .bc-date{ font-size:.78rem; color:var(--ink-soft); }
+.blog-card h3{ margin:0; font-family:var(--serif); font-weight:500; font-size:1.08rem; line-height:1.3; }
+.blog-card p{ margin:0; color:var(--ink-soft); font-size:.88rem; }
 </style>
 </head>
 <body>
@@ -985,6 +992,31 @@ figure.testi{ margin:0; display:flex; flex-direction:column; }
       </div>
     </div>
   </section>
+  <section id="blog-preview">
+    <div class="wrap">
+      <h2 class="section-title">From the blog</h2>
+      <p class="section-sub">Notes from running my own channel, with the real numbers.</p>
+      <div class="blog-grid">
+        <a class="blog-card" href="blog/shorts-analytics-79-videos-3-hits.html">
+          <span class="bc-date">24 Nov 2026</span>
+          <h3>I analyzed 79 Shorts in 28 days: three videos got 64% of my views</h3>
+          <p>Real YouTube Studio data from my sports Shorts channel: what the hits had in common, and what it can't prove.</p>
+        </a>
+        <a class="blog-card" href="blog/youtube-shorts-titles-real-examples.html">
+          <span class="bc-date">28 Oct 2026</span>
+          <h3>What four real YouTube Shorts titles taught me about timing</h3>
+          <p>Four real titles with their views and posting times, and what they say about timing and naming the player.</p>
+        </a>
+        <a class="blog-card" href="blog/youtube-channel-seo-setup-checklist.html">
+          <span class="bc-date">10 Oct 2026</span>
+          <h3>How to do YouTube channel SEO: a step-by-step setup checklist</h3>
+          <p>Every channel setting in order, where to find it in YouTube Studio, and what I've seen on my own channel.</p>
+        </a>
+      </div>
+      <p style="margin:22px 0 0;"><a href="blog/" style="color:var(--link);font-weight:600;">See all posts →</a></p>
+    </div>
+  </section>
+
  <section id="published-work">
     <div class="wrap">
       <h2 class="section-title">Published Work</h2>
